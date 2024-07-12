@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-mongoose.set("strictQuery", false);
 const MONGO_DB_URL =
   process.env.MONGO_DB_URL ||
   "mongodb+srv://musharizh56:admin@cluster0.clvs4os.mongodb.net/blogs";
