@@ -4,8 +4,8 @@ import { MdFavorite } from "react-icons/md";
 export default function BlogContent() {
   const { favoritesBLogs, handleRemoveFavorite } = useContext(GlobalContext);
   return (
-    <div className="flex items-center justify-center w-full">
-      <div className="m-5 w-full">
+    <div className="relative z-0 flex items-center justify-center w-full ">
+      <div className="m-5 mt-44 sm:mt-32 w-full">
         {favoritesBLogs.length > 0 ? (
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {favoritesBLogs.map((blog) => (

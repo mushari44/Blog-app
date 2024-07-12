@@ -14,7 +14,7 @@ const ThemeToggle = () => {
 
   return (
     <div className="">
-      <div className="flex items-center justify-center mt-2 sm:mt-0">
+      <div className="flex items-center justify-center mt-0">
         <button
           onClick={handleClick}
           className={`p-2 rounded-full focus:outline-none focus:ring-2 transition-transform duration-300 ${

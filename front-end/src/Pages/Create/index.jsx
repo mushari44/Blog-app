@@ -17,9 +17,9 @@ export default function Create() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen  ">
+    <div className="flex items-center justify-center sm:min-h-screen   ">
       <div
-        className=" shadow-md rounded-lg w-full max-w-lg p-6 mb-24"
+        className=" shadow-md rounded-lg w-full max-w-lg p-6  m-3 mt-52 "
         id="product"
       >
         <h2 className="text-2xl font-semibold mb-6 text-center">Add Blog</h2>
@@ -33,7 +33,7 @@ export default function Create() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter blog title"
-              className="mt-1 text-black block min-w-96 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1   text-black block sm:min-w-96 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               required
             />
           </div>
