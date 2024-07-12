@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useTheme } from "./ThemeContext";
 import { FaSun, FaMoon } from "react-icons/fa";
+import classNames from "classnames";
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme();
@@ -13,24 +14,31 @@ const ThemeToggle = () => {
   };
 
   return (
-    <div className="">
+    <div
+      className={classNames(
+        "left-0 min-w-28 items-center justify-center top-2 ",
+        {
+          fixed: window.innerWidth <= 600,
+        }
+      )}
+    >
       <div className="flex items-center justify-center mt-0">
         <button
           onClick={handleClick}
-          className={`p-2 rounded-full focus:outline-none focus:ring-2 transition-transform duration-300 ${
+          className={`p-0 sm:p-1 rounded-full focus:outline-none focus:ring-2 transition-transform duration-300 ${
             isAnimating ? "animate-rotate" : ""
           }`}
         >
           {theme === "light" ? (
-            <FaMoon className="text-gray-400  text-2xl md:text-4xl" />
+            <FaMoon className="text-gray-400 text-2xl md:text-4xl" />
           ) : (
-            <FaSun className="text-yellow-300 md:text-4xl text-2xl " />
+            <FaSun className="text-yellow-300 md:text-4xl text-2xl" />
           )}
         </button>
       </div>
       <div>
-        <span className="text-white md:text-base text-sm">
-          change theme to {theme === "light" ? "DARK" : "LIGHT"}
+        <span className="text-white md:text-base text-xs ">
+          Switch to {theme === "light" ? "Dark Mode" : "Light Mode"}
         </span>
       </div>
     </div>
