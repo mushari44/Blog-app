@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../../context";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
-export default function BlogContent() {
+export default function BlogContent({ blogs }) {
   const {
-    blogs,
     handleDeleteBlog,
     handleEdit,
     handleSave,
@@ -13,7 +13,15 @@ export default function BlogContent() {
     editedTitle,
     editedDescription,
     handleCancel,
+    handleAddFavorite,
+    handleRemoveFavorite,
+    favoritesBLogs,
   } = useContext(GlobalContext);
+
+  const isFavorite = (blogId) => {
+    return favoritesBLogs.some((fav) => fav._id === blogId);
+  };
+
   return (
     <div className="flex items-center justify-center w-full">
       <div className="m-5 w-full">
@@ -34,6 +42,7 @@ export default function BlogContent() {
                       onChange={handleChange}
                       className="border p-2 mb-2 w-full text-lg font-semibold outline-none text-black"
                       placeholder="Enter the Title"
+                      required
                     />
                   ) : (
                     <div>
@@ -54,6 +63,7 @@ export default function BlogContent() {
                     onChange={handleChange}
                     className="border p-2 mb-2 w-full h-40 resize-none outline-none text-black"
                     placeholder="Enter the description"
+                    required
                   />
                 </div>
                 <div className="flex justify-center mt-10 space-x-4">
@@ -85,6 +95,20 @@ export default function BlogContent() {
                         className="bg-red-500 py-2 px-3 rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
                       >
                         <FaTrashAlt size={20} />
+                      </button>
+                      <button
+                        onClick={() =>
+                          isFavorite(blog._id)
+                            ? handleRemoveFavorite(blog._id)
+                            : handleAddFavorite(blog._id)
+                        }
+                        className="bg-white/5 py-2 px-3 rounded hover:bg-slate-500 focus:outline-none"
+                      >
+                        {isFavorite(blog._id) ? (
+                          <MdFavorite size={20} />
+                        ) : (
+                          <MdFavoriteBorder size={20} />
+                        )}
                       </button>
                     </div>
                   )}

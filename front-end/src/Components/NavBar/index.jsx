@@ -27,6 +27,11 @@ export default function NavBar() {
               Add Blog
             </li>
           </Link>
+          <Link to={"/favorites"}>
+            <li className="cursor-pointer transition-transform transform hover:scale-110 hover:text-gray-400">
+              favorites
+            </li>
+          </Link>
         </ul>
       </nav>
     </div>

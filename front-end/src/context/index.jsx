@@ -8,21 +8,64 @@ export default function GlobalState({ children }) {
   const [editId, setEditId] = useState(null);
   const [editedTitle, setEditedTitle] = useState("");
   const [editedDescription, setEditedDescription] = useState("");
-
-  async function fetchBlogs() {
-    try {
-      const response = await axios.get(
-        "https://blog--server-f3dbd17cdd52.herokuapp.com/api/blogs"
-      );
-      setBlogs(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const [favoritesBLogs, setFavoritesBLogs] = useState([]);
 
   useEffect(() => {
     fetchBlogs();
   }, []);
+
+  useEffect(() => {
+    if (blogs.length > 0) {
+      fetchFavorites();
+    }
+  }, [blogs]);
+
+  async function fetchBlogs() {
+    try {
+      const response = await axios.get("http://127.0.0.1:5000/api/blogs");
+      setBlogs(response.data);
+    } catch (error) {
+      console.log("Error fetching blogs:", error);
+    }
+  }
+
+  async function fetchFavorites() {
+    try {
+      const response = await axios.get("http://127.0.0.1:5000/api/favorites");
+      const favorites = response.data;
+
+      const favoriteBlogIds = favorites.map((fav) => fav.id);
+      const favoriteBlogs = blogs.filter((blog) =>
+        favoriteBlogIds.includes(blog._id)
+      );
+
+      setFavoritesBLogs(favoriteBlogs);
+    } catch (error) {
+      console.log("Error fetching favorites:", error);
+    }
+  }
+
+  const handleAddFavorite = async (blogId) => {
+    try {
+      await axios.post(
+        `http://127.0.0.1:5000/api/favorites/addToFavorites/${blogId}`
+      );
+      fetchFavorites();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleRemoveFavorite = async (blogId) => {
+    try {
+      await axios.delete(
+        `http://127.0.0.1:5000/api/favorites/removeFavorite/${blogId}`
+      );
+      fetchFavorites();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleAddBlog = async (title, description) => {
     const date = new Date().toLocaleDateString("en-US", {
@@ -44,20 +87,21 @@ export default function GlobalState({ children }) {
       );
       fetchBlogs();
     } catch (error) {
-      console.log(error);
+      console.log("Error adding blog:", error);
     }
   };
 
-  async function handleDeleteBlog(id) {
+  const handleDeleteBlog = async (id) => {
     try {
       await axios.delete(
         `https://blog--server-f3dbd17cdd52.herokuapp.com/api/blogs/delete/${id}`
       );
+      handleRemoveFavorite(id);
       fetchBlogs();
     } catch (error) {
-      console.log(error);
+      console.log("Error deleting blog:", error);
     }
-  }
+  };
 
   const handleEdit = (id) => {
     const blogToEdit = blogs.find((blog) => blog._id === id);
@@ -91,7 +135,7 @@ export default function GlobalState({ children }) {
       fetchBlogs();
       handleCancel();
     } catch (error) {
-      console.log(error);
+      console.log("Error saving blog:", error);
     }
   };
 
@@ -124,6 +168,10 @@ export default function GlobalState({ children }) {
         editedDescription,
         handleCancel,
         fetchBlogs,
+        favoritesBLogs,
+        handleAddFavorite,
+        fetchFavorites,
+        handleRemoveFavorite,
       }}
     >
       {children}

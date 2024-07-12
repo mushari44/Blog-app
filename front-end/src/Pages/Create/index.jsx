@@ -13,7 +13,7 @@ export default function Create() {
     handleAddBlog(title, description);
     setTitle("");
     setDescription("");
-    navigate("/"); // Navigate to home page after adding blog
+    navigate("/");
   };
 
   return (
