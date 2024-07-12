@@ -19,7 +19,7 @@ export default function Create() {
   return (
     <div className="flex items-center justify-center sm:min-h-screen   ">
       <div
-        className=" shadow-md rounded-lg w-full max-w-lg p-6  m-3 mt-52 "
+        className=" shadow-md rounded-lg w-full max-w-lg p-6  m-3 mt-52 sm:mt-0 "
         id="product"
       >
         <h2 className="text-2xl font-semibold mb-6 text-center">Add Blog</h2>
