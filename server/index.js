@@ -15,7 +15,7 @@ app.use("/api/favorites", favoritesRouter);
 app.use("/api/blogs", blogRouter);
 
 app.use("/api", (req, res) => {
-  res.status(200).json({ message: "Hello World!" });
+  res.status(200).json({ message: "Hello World!!" });
 });
 
 const PORT = process.env.PORT || 5000;
