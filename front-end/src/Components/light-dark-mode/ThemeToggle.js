@@ -37,7 +37,10 @@ const ThemeToggle = () => {
             <FaSun className="text-yellow-300 md:text-4xl text-2xl" />
           )}
         </button>
-        <span className="text-white md:text-base text-xs  mt-1">
+        <span
+          className="text-white md:text-base text-xs mt-1"
+          style={{ userSelect: "none" }}
+        >
           Switch to {theme === "light" ? "Dark Mode" : "Light Mode"}
         </span>
       </div>
