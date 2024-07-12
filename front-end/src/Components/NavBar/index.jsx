@@ -14,7 +14,7 @@ const NavBar = () => {
           : "from-black via-gray-800 to-black "
       } animate-gradient-x py-4 shadow-2xl w-full`}
     >
-      <nav className="flex flex-col items-center justify-center h-12 max-w-6xl mx-auto space-y-2 sm:flex-row sm:space-y-0 sm:justify-between sm:h-20">
+      <nav className="flex flex-col items-center justify-center h-16 max-w-6xl mx-auto space-y-3 sm:flex-row sm:space-y-0 sm:justify-between sm:h-20">
         <ThemeToggle />
         <Link to={"/"}>
           <div className="text-center sm:text-left  sm:w-full ">

@@ -16,7 +16,7 @@ const ThemeToggle = () => {
   return (
     <div
       className={classNames(
-        "left-0 min-w-28 items-center justify-center top-2 ",
+        "left-0 min-w-28 items-center justify-center top-3 ",
         {
           fixed: window.innerWidth <= 600,
         }
