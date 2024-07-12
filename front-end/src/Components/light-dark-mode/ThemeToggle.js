@@ -16,15 +16,17 @@ const ThemeToggle = () => {
   return (
     <div
       className={classNames(
-        "left-0 min-w-28 items-center justify-center top-3 ",
+        "left-0 min-w-28 items-center justify-center top-2 ",
         {
           fixed: window.innerWidth <= 600,
         }
       )}
     >
-      <div className="flex items-center justify-center mt-0">
+      <div
+        className="flex flex-col items-center justify-center mt-0 cursor-pointer "
+        onClick={handleClick}
+      >
         <button
-          onClick={handleClick}
           className={`p-0 sm:p-1 rounded-full focus:outline-none focus:ring-2 transition-transform duration-300 ${
             isAnimating ? "animate-rotate" : ""
           }`}
@@ -35,9 +37,7 @@ const ThemeToggle = () => {
             <FaSun className="text-yellow-300 md:text-4xl text-2xl" />
           )}
         </button>
-      </div>
-      <div>
-        <span className="text-white md:text-base text-xs ">
+        <span className="text-white md:text-base text-xs  mt-1">
           Switch to {theme === "light" ? "Dark Mode" : "Light Mode"}
         </span>
       </div>
