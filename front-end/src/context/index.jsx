@@ -11,7 +11,9 @@ export default function GlobalState({ children }) {
 
   async function fetchBlogs() {
     try {
-      const response = await axios.get("http://127.0.0.1:5000/api/blogs");
+      const response = await axios.get(
+        "https://blog--server-f3dbd17cdd52.herokuapp.com/api/blogs"
+      );
       setBlogs(response.data);
     } catch (error) {
       console.log(error);
@@ -32,11 +34,14 @@ export default function GlobalState({ children }) {
       minute: "numeric",
     });
     try {
-      await axios.post("http://127.0.0.1:5000/api/blogs/add", {
-        title,
-        description,
-        date,
-      });
+      await axios.post(
+        "https://blog--server-f3dbd17cdd52.herokuapp.com/api/blogs/add",
+        {
+          title,
+          description,
+          date,
+        }
+      );
       fetchBlogs();
     } catch (error) {
       console.log(error);
@@ -45,7 +50,9 @@ export default function GlobalState({ children }) {
 
   async function handleDeleteBlog(id) {
     try {
-      await axios.delete(`http://127.0.0.1:5000/api/blogs/delete/${id}`);
+      await axios.delete(
+        `https://blog--server-f3dbd17cdd52.herokuapp.com/api/blogs/delete/${id}`
+      );
       fetchBlogs();
     } catch (error) {
       console.log(error);
@@ -72,11 +79,14 @@ export default function GlobalState({ children }) {
         minute: "numeric",
       });
 
-      await axios.put(`http://127.0.0.1:5000/api/blogs/update/${id}`, {
-        title: newTitle,
-        description: newDescription,
-        date: date,
-      });
+      await axios.put(
+        `https://blog--server-f3dbd17cdd52.herokuapp.com/api/blogs/update/${id}`,
+        {
+          title: newTitle,
+          description: newDescription,
+          date: date,
+        }
+      );
 
       fetchBlogs();
       handleCancel();
