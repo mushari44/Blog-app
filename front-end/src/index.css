@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 8s ease infinite;
+  background-size: 40% 50%;
+}
+
+:root {
+  --bg-color-light: #e3e3e3;
+  --bg-color-dark: #1c1c1c;
+  --text-color-light: #333333;
+  --text-color-dark: #e0e0e0;
+  --bg-product-light: rgba(255, 255, 255, 0.808);
+  --bg-product-dark: #252525;
+}
+
+html.light {
+  --bg-color: var(--bg-color-light);
+  --text-color: var(--text-color-light);
+  --product-color: var(--bg-product-light);
+
+  --title-text-color: linear-gradient(
+    180deg,
+    rgb(255, 255, 255) 10%,
+    rgb(103, 157, 195) 100%
+  );
+}
+
+html.dark {
+  --bg-color: var(--bg-color-dark);
+  --text-color: var(--text-color-dark);
+  --product-color: var(--bg-product-dark);
+  --title-text-color: linear-gradient(
+    180deg,
+    rgb(0, 0, 0) 0%,
+    rgb(135, 147, 214) 100%
+  );
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 1s ease, color 1s ease;
+}
+
+#product {
+  background: var(--product-color);
+  transition: background 1s ease;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rotate {
+  animation: rotate 0.6s linear;
+}
+
+#title {
+  background: var(--title-text-color);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: fit-content;
+}
