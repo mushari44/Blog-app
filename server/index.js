@@ -13,5 +13,6 @@ app.use("/api/blogs", blogRouter);
 app.use("/api", (req, res) => {
   res.status(200).json({ message: "Hello World" });
 });
+
 const PORT = process.env.PORT || 5000;
-app.listen(5000, () => console.log(`App is running at 5000...`));
+app.listen(PORT, () => console.log(`App is running at 5000...`));
