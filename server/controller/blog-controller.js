@@ -1,5 +1,40 @@
 const mongoose = require("mongoose");
-const Blog = require("../model/Blog");
+const Blog = require("../model/Blog.js");
+const Favorite = require("../model/Favorite.js");
+
+const removeFavorite = async (req, res) => {
+  const id = req.params.id;
+  try {
+    await Favorite.findOneAndDelete({ id });
+    res.status(200).json({ message: "Favorite removed successfully" });
+  } catch (error) {
+    console.log("Error:", error);
+    res.status(500).json({ message: "Error removing favorite", error });
+  }
+};
+
+const fetchFavoritesBlogs = async (req, res) => {
+  try {
+    const favorites = await Favorite.find({});
+    res.json(favorites);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching favorite blogs", error });
+  }
+};
+
+const addToFavorites = async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const newlyFavoriteBlog = new Favorite({ id });
+
+  try {
+    await newlyFavoriteBlog.save();
+    res.status(200).json({ newlyFavoriteBlog });
+  } catch (error) {
+    console.log("Error:", error);
+    res.status(500).json({ message: "Error adding to favorites", error });
+  }
+};
 
 const fetchListOfBlogs = async (req, res) => {
   try {
@@ -12,19 +47,14 @@ const fetchListOfBlogs = async (req, res) => {
 
 const addNewBlog = async (req, res) => {
   const { title, description, date } = req.body;
-
-  const newlyCreateBlog = new Blog({
-    title,
-    description,
-    date,
-  });
+  const newlyCreateBlog = new Blog({ title, description, date });
 
   try {
     await newlyCreateBlog.save();
-    return res.status(200).json({ newlyCreateBlog });
+    res.status(200).json({ newlyCreateBlog });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ message: "Error creating blog", error });
+    console.log("Error:", error);
+    res.status(500).json({ message: "Error creating blog", error });
   }
 };
 
@@ -36,11 +66,10 @@ const deleteABlog = async (req, res) => {
     if (!findCurrentBlog) {
       return res.status(404).json({ message: "Blog not found" });
     }
-
-    return res.status(200).json({ message: "Successfully deleted" });
+    res.status(200).json({ message: "Successfully deleted" });
   } catch (error) {
-    console.log(error);
-    return res
+    console.log("Error:", error);
+    res
       .status(500)
       .json({ message: "Unable to delete! Please try again", error });
   }
@@ -60,15 +89,22 @@ const updateABlog = async (req, res) => {
     if (!currentBlogToUpdate) {
       return res.status(404).json({ message: "Blog not found" });
     }
-
-    return res.status(200).json({ currentBlogToUpdate });
+    res.status(200).json({ currentBlogToUpdate });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({
+    console.log("Error:", error);
+    res.status(500).json({
       message: "Something went wrong while updating! Please try again",
       error,
     });
   }
 };
 
-module.exports = { fetchListOfBlogs, deleteABlog, updateABlog, addNewBlog };
+module.exports = {
+  fetchListOfBlogs,
+  deleteABlog,
+  updateABlog,
+  addNewBlog,
+  fetchFavoritesBlogs,
+  addToFavorites,
+  removeFavorite,
+};
