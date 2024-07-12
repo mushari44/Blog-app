@@ -22,7 +22,9 @@ export default function GlobalState({ children }) {
 
   async function fetchBlogs() {
     try {
-      const response = await axios.get("http://127.0.0.1:5000/api/blogs");
+      const response = await axios.get(
+        "https://blog--server-f3dbd17cdd52.herokuapp.com/api/blogs"
+      );
       setBlogs(response.data);
     } catch (error) {
       console.log("Error fetching blogs:", error);
@@ -31,7 +33,9 @@ export default function GlobalState({ children }) {
 
   async function fetchFavorites() {
     try {
-      const response = await axios.get("http://127.0.0.1:5000/api/favorites");
+      const response = await axios.get(
+        "https://blog--server-f3dbd17cdd52.herokuapp.com/api/favorites"
+      );
       const favorites = response.data;
 
       const favoriteBlogIds = favorites.map((fav) => fav.id);
@@ -48,7 +52,7 @@ export default function GlobalState({ children }) {
   const handleAddFavorite = async (blogId) => {
     try {
       await axios.post(
-        `http://127.0.0.1:5000/api/favorites/addToFavorites/${blogId}`
+        `https://blog--server-f3dbd17cdd52.herokuapp.com/api/favorites/addToFavorites/${blogId}`
       );
       fetchFavorites();
     } catch (error) {
@@ -59,7 +63,7 @@ export default function GlobalState({ children }) {
   const handleRemoveFavorite = async (blogId) => {
     try {
       await axios.delete(
-        `http://127.0.0.1:5000/api/favorites/removeFavorite/${blogId}`
+        `https://blog--server-f3dbd17cdd52.herokuapp.com/api/favorites/removeFavorite/${blogId}`
       );
       fetchFavorites();
     } catch (error) {
