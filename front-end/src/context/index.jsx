@@ -23,7 +23,7 @@ export default function GlobalState({ children }) {
   async function fetchBlogs() {
     try {
       const response = await axios.get(
-        "https://blog--server-f3dbd17cdd52.herokuapp.com/api/blogs"
+        "https://blogapp-back-end.vercel.app/api/blogs"
       );
       setBlogs(response.data);
     } catch (error) {
@@ -34,7 +34,7 @@ export default function GlobalState({ children }) {
   async function fetchFavorites() {
     try {
       const response = await axios.get(
-        "https://blog--server-f3dbd17cdd52.herokuapp.com/api/favorites"
+        "https://blogapp-back-end.vercel.app/api/favorites"
       );
       const favorites = response.data;
 
@@ -52,7 +52,7 @@ export default function GlobalState({ children }) {
   const handleAddFavorite = async (blogId) => {
     try {
       await axios.post(
-        `https://blog--server-f3dbd17cdd52.herokuapp.com/api/favorites/addToFavorites/${blogId}`
+        `https://blogapp-back-end.vercel.app/api/favorites/addToFavorites/${blogId}`
       );
       fetchFavorites();
     } catch (error) {
@@ -63,7 +63,7 @@ export default function GlobalState({ children }) {
   const handleRemoveFavorite = async (blogId) => {
     try {
       await axios.delete(
-        `https://blog--server-f3dbd17cdd52.herokuapp.com/api/favorites/removeFavorite/${blogId}`
+        `https://blogapp-back-end.vercel.app/api/favorites/removeFavorite/${blogId}`
       );
       fetchFavorites();
     } catch (error) {
@@ -81,14 +81,11 @@ export default function GlobalState({ children }) {
       minute: "numeric",
     });
     try {
-      await axios.post(
-        "https://blog--server-f3dbd17cdd52.herokuapp.com/api/blogs/add",
-        {
-          title,
-          description,
-          date,
-        }
-      );
+      await axios.post("https://blogapp-back-end.vercel.app/api/blogs/add", {
+        title,
+        description,
+        date,
+      });
       fetchBlogs();
     } catch (error) {
       console.log("Error adding blog:", error);
@@ -98,7 +95,7 @@ export default function GlobalState({ children }) {
   const handleDeleteBlog = async (id) => {
     try {
       await axios.delete(
-        `https://blog--server-f3dbd17cdd52.herokuapp.com/api/blogs/delete/${id}`
+        `https://blogapp-back-end.vercel.app/api/blogs/delete/${id}`
       );
       handleRemoveFavorite(id);
       fetchBlogs();
@@ -128,7 +125,7 @@ export default function GlobalState({ children }) {
       });
 
       await axios.put(
-        `https://blog--server-f3dbd17cdd52.herokuapp.com/api/blogs/update/${id}`,
+        `https://blogapp-back-end.vercel.app/api/blogs/update/${id}`,
         {
           title: newTitle,
           description: newDescription,

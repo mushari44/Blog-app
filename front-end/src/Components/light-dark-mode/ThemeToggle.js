@@ -32,7 +32,7 @@ const ThemeToggle = () => {
           }`}
         >
           {theme === "light" ? (
-            <FaMoon className="text-gray-400 text-2xl md:text-4xl" />
+            <FaMoon className="text-gray-100 text-2xl md:text-4xl " />
           ) : (
             <FaSun className="text-yellow-300 md:text-4xl text-2xl" />
           )}
